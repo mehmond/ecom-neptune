@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+
+<head>
+	<title>Neptune - Register</title>
+	<style>
+	a:hover{
+		opacity: .5;
+		color: #007bff;
+	}
+	</style>
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="row align-items-center my-5">
+				<div class="col-6 mx-auto">
+					<div class="card shadow border">
+						<div class="card-body align-items-center p-md-5">
+							<h2 class="text-center font-weight-bold mb-5">Login</h3>
+								<form>
+									<div class="form-group">
+										<label for="exampleInputEmail1">Email address</label>
+										<input type="email" class="form-control" id="exampleInputEmail1"
+											aria-describedby="emailHelp" placeholder="Enter email">
+										<small id="emailHelp" class="form-text text-muted">We'll never share your email
+											with
+											anyone else.</small>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Password</label>
+										<input type="password" class="form-control" id="exampleInputPassword1"
+											placeholder="Password">
+									</div>
+									<div class="form-check mb-3">
+										<input type="checkbox" class="form-check-input" id="exampleCheck1">
+										<label class="form-check-label" for="exampleCheck1">Check me out</label>
+									</div>
+									<small class="form-text my-4">Don't have an account? Click <a th:href="@{/sign-up}"> here </a> to register.</small>
+									<button type="submit" class="btn btn-primary float-right">Submit</button>
+								</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

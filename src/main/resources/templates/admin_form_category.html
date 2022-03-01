@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{adminLayout}">
+
+<head>
+	<title>ST ADMIN - CATEGORY - CREATE</title>
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+		<div class="container vh-100">
+			<div class="row align-items-center my-5">
+				<div class="col-6 mx-auto">
+					<div class="card shadow border">
+					<form th:action="@{/admin/save-category}" th:object="${category}" method="POST">
+						<div class="card-body align-items-center p-md-5">
+							<h2 th:text="${category.categoryId} ? 'EDIT CATEGORY' : 'ADD CATEGORY'" class="text-center font-weight-bold mb-5" />
+									<div class="form-group">
+										<input type="text" class="form-control" id="exampleInputEmail1"
+											aria-describedby="emailHelp" placeholder="Category Id"
+											th:field="*{categoryId}" readonly hidden >
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Category name</label>
+										<input type="text" class="form-control" id="exampleInputPassword1"
+											placeholder="Category name" th:field="*{categoryName}" required >
+									</div>
+									<div class="form-group mt-5">
+										<hr />
+										<button type="submit" class="btn btn-primary float-right ml-2">Submit</button>
+										<a th:href="@{/admin/manage-categories}" class="btn btn-secondary float-right">
+											<span class="text">Go back</span>
+										</a>
+									</div>
+								</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
