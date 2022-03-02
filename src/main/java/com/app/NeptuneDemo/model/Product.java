@@ -19,7 +19,7 @@ public class Product {
 	
 	
 	@ManyToOne(cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
-	@JoinTable(name= "category_id")
+	@JoinColumn(name= "category_id", referencedColumnName = "category_id")
 	private Category category;
 
 }

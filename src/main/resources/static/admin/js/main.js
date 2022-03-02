@@ -17,8 +17,8 @@ $(document).ready(function() {
 	$('.table .categoryDeleteBtn').on('click', function(event) {
 		event.preventDefault();
 		var href = $(this).attr('href');
-		$('#deleteModal #deleteCategory').attr('href', href);
-		$('#deleteModal').modal({
+		$('#deleteCategoryModal #deleteCategory').attr('href', href);
+		$('#deleteCategoryModal').modal({
 			keyboard: false,
 			backdrop: 'static'
 		});
