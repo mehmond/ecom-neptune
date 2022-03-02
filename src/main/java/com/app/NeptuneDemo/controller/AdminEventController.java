@@ -32,7 +32,7 @@ public class AdminEventController {
     @PostMapping("/admin/save-event")
     public String save(Event event) {
         eventService.save(event);
-        return "redirect:/admin/manage-categories";
+        return "redirect:/admin/manage-events";
     }
 
     @GetMapping("/admin/edit-event/{id}")
