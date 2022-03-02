@@ -8,12 +8,12 @@ public class ProductDTO {
 	private String productName;
 	private double productPrice;
 	private String productImage;
-	private Category category;
+	private int category;
 	public ProductDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ProductDTO(Long productId, String productName, double productPrice, String productImage, Category category) {
+	public ProductDTO(Long productId, String productName, double productPrice, String productImage, int category) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
@@ -45,10 +45,10 @@ public class ProductDTO {
 	public void setProductImage(String productImage) {
 		this.productImage = productImage;
 	}
-	public Category getCategory() {
+	public int getCategory() {
 		return category;
 	}
-	public void setCategory(Category category) {
+	public void setCategory(int category) {
 		this.category = category;
 	}
 
