@@ -3,7 +3,7 @@
 	layout:decorate="~{adminLayout}">
 
 <head>
-	<title>ST ADMIN - COUPON</title>
+	<title>ST ADMIN - EVENT</title>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
 			<!-- DataTales Example -->
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h4 class="mt-0 font-weight-bold text-primary">Event Data<a href="#"
+					<h4 class="mt-0 font-weight-bold text-primary">Event Data<a th:href="@{/admin/insert-event}"
 							class="btn btn-primary btn-icon-split float-right">
 							<span class="icon text-white-50">
 								<i class="fas fa-plus"></i>
@@ -34,6 +34,7 @@
 									<th>Name</th>
 									<th>Start Date</th>						
 									<th>End Date</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -42,6 +43,7 @@
 									<th>Name</th>
 									<th>Start Date</th>
 									<th>End Date</th>
+									<th>Action</th>
 								</tr>
 							</tfoot>
 								<tbody>
