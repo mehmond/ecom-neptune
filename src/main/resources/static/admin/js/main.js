@@ -24,3 +24,15 @@ $(document).ready(function() {
 		});
 	});
 });
+
+$(document).ready(function() {
+	$('.table .EventDeleteBtn').on('click', function(event) {
+		event.preventDefault();
+		var href = $(this).attr('href');
+		$('#deleteEventModal #deleteEvent').attr('href', href);
+		$('#deleteEventModal').modal({
+			keyboard: false,
+			backdrop: 'static'
+		});
+	});
+});
