@@ -50,6 +50,8 @@
 									<tr th:each="event: ${events}">
 										<td th:text="${event.eventId}" />
 										<td th:text="${event.eventName}" />
+										<td th:text="${event.startDate}" />
+										<td th:text="${event.endDate}" />
 										<td>
 											<a th:href="@{/admin/edit-event/{id}(id=${event.eventId})}"
 												class="btn btn-warning btn-circle btn-sm eventEditBtn" title="Update">
