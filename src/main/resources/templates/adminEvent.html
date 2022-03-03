@@ -47,16 +47,16 @@
 								</tr>
 							</tfoot>
 								<tbody>
-									<tr th:each="Event: ${Event}">
-										<td th:text="${Event.EventId}" />
-										<td th:text="${Event.EventName}" />
+									<tr th:each="event: ${events}">
+										<td th:text="${event.eventId}" />
+										<td th:text="${event.eventName}" />
 										<td>
-											<a th:href="@{/admin/edit-Event/{id}(id=${Event.EventId})}"
-												class="btn btn-warning btn-circle btn-sm EventEditBtn" title="Update">
+											<a th:href="@{/admin/edit-event/{id}(id=${event.eventId})}"
+												class="btn btn-warning btn-circle btn-sm eventEditBtn" title="Update">
 												<i class="fas fa-edit"></i>
 											</a>
-											<a th:href="@{/admin/destroy-Event/(id=${Event.EventId})}"
-												class="btn btn-danger btn-circle btn-sm EventDeleteBtn" title="Delete">
+											<a th:href="@{/admin/destroy-event/(id=${event.eventId})}"
+												class="btn btn-danger btn-circle btn-sm eventDeleteBtn" title="Delete">
 												<i class="fas fa-trash"></i>
 											</a>
 										</td>

@@ -16,9 +16,9 @@ public class AdminEventController {
     @Autowired
     private EventService eventService;
 
-    @GetMapping("/admin/manage-event")
+    @GetMapping("/admin/manage-events")
     public String index(Model model) {
-        model.addAttribute("event", eventService.index());
+        model.addAttribute("events", eventService.index());
         return "adminEvent";
     }
 
