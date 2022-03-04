@@ -1,9 +1,11 @@
 package com.app.NeptuneDemo.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.NeptuneDemo.dto.ProductDTO;
-import com.app.NeptuneDemo.model.Category;
 import com.app.NeptuneDemo.model.Product;
 import com.app.NeptuneDemo.service.CategoryService;
 import com.app.NeptuneDemo.service.ProductService;
@@ -24,7 +25,7 @@ public class AdminProductController {
 	@Autowired
 	CategoryService categoryService;
 	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/product-photos";
-
+	private String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ssss").format(new Date());
 	@GetMapping("/admin/manage-products")
 	public String index(Model model) {
 		model.addAttribute("products", productService.index());
@@ -48,7 +49,7 @@ public class AdminProductController {
 		prod.setProductImage(products.getImageName());
 		String imageUUId;
 		if (!file.isEmpty()) {
-			imageUUId = file.getOriginalFilename().toString();
+			imageUUId = timeStamp + file.getOriginalFilename().toString();
 			Path fileNameAndPath = Paths.get(uploadDirectory, imageUUId);
 			Files.write(fileNameAndPath, file.getBytes());
 		} else {
