@@ -15,7 +15,6 @@
 
 
 $(document).ready(function() {
-  
 	$('#productPrice').keyup(function() {
 		this.value = this.value.replace(/[^0-9\.]/g, '');
 	});
@@ -31,14 +30,16 @@ $(document).ready(function() {
 		});
 	});
 
+
 	//Product Delete Modal
 	$('.table .productDeleteBtn').on('click', function(event) {
 		event.preventDefault();
 		var href = $(this).attr('href');
 		$('#deleteProductModal #deleteProduct').attr('href', href);
 		$('#deleteProductModal').modal({
+		});
+	});
 });
-
 $(document).ready(function() {
 	$('.table .EventDeleteBtn').on('click', function(event) {
 		event.preventDefault();
