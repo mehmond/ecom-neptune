@@ -19,7 +19,7 @@ public class AdminCouponController {
     @GetMapping("/admin/manage-coupon")
     public String index(Model model) {
         model.addAttribute("coupon", couponService.index());
-        return "adminEvent";
+        return "adminCoupon";
     }
 
     @GetMapping("/admin/insert-coupon")

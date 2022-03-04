@@ -17,8 +17,8 @@
 			<!-- DataTales Example -->
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h4 class="mt-0 font-weight-bold text-primary">Coupon Data<a href="#"
-							class="btn btn-primary btn-icon-split float-right">
+					<h4 class="mt-0 font-weight-bold text-primary">Coupon Data
+					<a href="@{/admin/insert-coupon}" class="btn btn-primary btn-icon-split float-right">
 							<span class="icon text-white-50">
 								<i class="fas fa-plus"></i>
 							</span>
@@ -49,6 +49,21 @@
 								</tr>
 							</tfoot>
 							<tbody>
+								<tr th:each="coupon: ${coupon}">
+									<td th:text="${coupon.couponId}" />
+									<td th:text="${coupon.couponName}" />
+									<td>
+										<a th:href="@{/admin/edit-coupon/{id}(id=${coupon.couponId})}"
+											class="btn btn-warning btn-circle btn-sm couponEditBtn" title="Update">
+											<i class="fas fa-edit"></i>
+										</a>
+										<a th:href="@{/admin/destroy-coupon/(id=${coupon.couponId})}"
+											class="btn btn-danger btn-circle btn-sm couponDeleteBtn" title="Delete">
+											<i class="fas fa-trash"></i>
+										</a>
+									</td>
+								</tr>
+							</tbody>
 								<tr>
 									<td>C100001</td>
 									<td>Lorem</td>
