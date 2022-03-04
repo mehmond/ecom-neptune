@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{adminLayout}">
+
+<head>
+	<title>ST ADMIN - EVENT - CREATE</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="container vh-100">
+			<div class="row align-items-center my-5">
+				<div class="col-6 mx-auto">
+					<div class="card shadow border">
+					<form th:action="@{/admin/save-event}" th:object="${event}" method="POST">
+						<div class="card-body align-items-center p-md-5">
+							<h2 th:text="${event.eventId} ? 'EDIT EVENT' : 'ADD EVENT'" class="text-center font-weight-bold mb-5" />
+									<div class="form-group">
+										<input type="text" class="form-control" id="exampleInputEmail1"
+											aria-describedby="emailHelp" placeholder="Event Id"
+											th:field="*{eventId}" readonly hidden >
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Event name</label>
+										<input type="text" class="form-control" id="exampleInputPassword1"
+											placeholder="Event name" th:field="*{eventName}" required ><br>
+                                            <label for="exampleInputPassword1"> Start Date</label>
+										<input type="date" class="form-control" id="exampleInputPassword1"
+											placeholder="Event Start Date" th:field="*{startDate}" required ><br>
+                                            <label for="exampleInputPassword1"> End Date</label>
+										<input type="date" class="form-control" id="exampleInputPassword1"
+											placeholder="Event End Date" th:field="*{endDate}" required ><br>
+									</div>
+									<div class="form-group mt-5">
+										<hr />
+										<button type="submit" class="btn btn-primary float-right ml-2">Submit</button>
+										<a th:href="@{/admin/manage-events}" class="btn btn-secondary float-right">
+											<span class="text">Go back</span>
+										</a>
+									</div>
+								</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
