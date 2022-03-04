@@ -60,7 +60,6 @@ $(document).ready(function() {
 		var fileName = $(this).val().split("\\").pop();
 		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 	});
-<<<<<<< HEAD
 	
 $(document).ready(function() {
 	$('.table .CouponDeleteBtn').on('click', function(coupon) {
@@ -82,6 +81,3 @@ $(document).ready(function() {
 		var fileName = $(this).val().split("\\").pop();
 		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
-=======
-});
->>>>>>> cb1314640c5849cb87e41e4718cc25c8a97101bb
