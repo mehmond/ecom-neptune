@@ -1,10 +1,18 @@
 package com.app.NeptuneDemo.model;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,7 +25,15 @@ public class Category {
 	@Column(name = "category_name", nullable = false)
 	private String categoryName;
 
+	@OneToMany(mappedBy = "category", orphanRemoval = true)
+	private List<Product> products;
+
 	public Category() {
+	}
+
+	public Category(String categoryName) {
+		super();
+		this.categoryName = categoryName;
 	}
 
 	public Category(Long categoryId, String categoryName) {

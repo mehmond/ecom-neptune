@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{adminLayout}">
+
+<head>
+	<title>ST ADMIN - CATEGORY - CREATE</title>
+
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="container vh-100">
+			<div class="row align-items-center my-5">
+				<div class="col-6 mx-auto">
+					<div class="card shadow border">
+						<form th:action="@{/admin/save-product}" th:object="${product}" method="POST"
+							enctype="multipart/form-data">
+							<div class="card-body align-items-center p-md-5">
+								<h2 th:text="${product.productId} ? 'EDIT PRODUCT' : 'ADD PRODUCT'"
+									class="text-center font-weight-bold mb-5" />
+								<div class="form-group">
+									<input type="text" class="form-control" id="productId" aria-describedby="emailHelp"
+										placeholder="Product Id" th:field="*{productId}" readonly hidden>
+								</div>
+								<div class="form-group">
+									<label for="exampleInputPassword1">Product name</label>
+									<input type="text" class="form-control" id="productName" name="productName"
+										placeholder="Product name" th:field="*{productName}" required>
+								</div>
+								<div class="form-group">
+									<label for="exampleFormControlSelect1">Select Category</label>
+									<select class="form-control" th:field="*{categoryId}" id="categoryId"
+										name="categoryId">
+										<option th:each="category :${categories}" th:value="${category.categoryId}"
+											th:text="${category.categoryName}" />
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="exampleInputPassword1">Product Price</label>
+									<input type="text" class="form-control" id="productPrice" name="productPrice"
+										placeholder="Product price" th:field="*{productPrice}" required>
+								</div>
+								<div class="form-group">
+									<p>Product Image</p>
+									<div class="custom-file">
+										<input type="file" class="custom-file-input" name="productImage"
+											accept="image/jpeg, image/png" id="productImage" />
+										<label class="custom-file-label" for="productImage">Choose file</label>
+									</div>
+								</div>
+								<div class="form-group">
+									<img src="#" id="imgPreview" height="100px" width="100px"
+										th:src="@{${'../product-photos/' + product.imageName}}" style="margin-top: 20px"
+										alt=" ">
+								</div>
+								<input type="hidden" name="imageName" th:value="${product.imageName}">
+								<div class="form-group my-5">
+									<hr />
+									<button type="submit" class="btn btn-primary float-right ml-2">Submit</button>
+									<a th:href="@{/admin/manage-products}" class="btn btn-secondary float-right">
+										<span class="text">Go back</span>
+									</a>
+								</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+</body>
+
+</html>

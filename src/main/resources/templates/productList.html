@@ -49,10 +49,7 @@
 											<div class="card-body">
 												<div class="shop__sidebar__categories">
 													<ul class="nice-scroll">
-														<li><a href="#">Men (20)</a></li>
-														<li><a href="#">Bags (20)</a></li>
-														<li><a href="#">Clothing (20)</a></li>
-														<li><a href="#">Accessories (20)</a></li>
+														<li  th:each="category :${categories}"><a href="#" th:text="${category.categoryName}"/></li>
 													</ul>
 												</div>
 											</div>
@@ -83,81 +80,20 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="col-lg-4 col-md-6 col-sm-6" th:each="product: ${products}">
 								<div class="product__item">
-									<div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-									<span class="label">Sale</span>
+									<div class="product__item__pic set-bg" th:data-setbg="@{${'/product-photos/' + product.productImage}}">
+									<!-- <span class="label">Sale</span>-->
 									
 									</div>
 									<div class="product__item__text">
-										<h6>Piqué Biker Jacket</h6>
+										<h6 th:text="${product.productName}" />
 										<a href="#" class="add-cart">+ Add To Cart</a>
-										<h5>P 1267.24</h5>
+										<h5 th:text="${product.productPrice}"/>
 									</div>
 								</div>
 							</div>
 						
-						<div class="col-lg-4 col-md-6 col-sm-6">
-								<div class="product__item sale">
-									<div class="product__item__pic set-bg" th:data-setbg="@{/img/product/phsb.jpg}">
-									<span class="label">Sale</span>
-									</div>
-									<div class="product__item__text">
-										<h6>Plain Hoodie Sky Blue</h6>
-										<a href="#" class="add-cart">+ Add To Cart</a>
-										<h5>P 800.00</h5>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-sm-6">
-								<div class="product__item sale">
-									<div class="product__item__pic set-bg" data-setbg="img/product/product-16.jpg">
-									<span class="label">Sale</span>
-									</div>
-									<div class="product__item__text">
-										<h6>Winter Jacket Gray</h6>
-										<a href="#" class="add-cart">+ Add To Cart</a>
-										<h5>P 1500.00</h5>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-sm-6">
-								<div class="product__item sale">
-									<div class="product__item__pic set-bg" data-setbg="img/product/product-15.jpg">
-									<span class="label">Sale</span>
-									</div>
-									<div class="product__item__text">
-										<h6>Winter Jacket Red</h6>
-										<a href="#" class="add-cart">+ Add To Cart</a>
-										<h5>P 1260.00</h5>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-sm-6">
-								<div class="product__item sale">
-									<div class="product__item__pic set-bg" data-setbg="img/product/product17.jpg">
-									<span class="label">Sale</span>
-									</div>
-									<div class="product__item__text">
-										<h6>Winter Jacket Red</h6>
-										<a href="#" class="add-cart">+ Add To Cart</a>
-										<h5>P 100.00</h5>
-									</div>
-								</div>
-							</div>
-						
-						<div class="col-lg-4 col-md-6 col-sm-6">
-								<div class="product__item sale">
-									<div class="product__item__pic set-bg" data-setbg="img/product/product-4.jpg">
-									<span class="label">Sale</span>
-									</div>
-									<div class="product__item__text">
-										<h6>Polo Jacket</h6>
-										<a href="#" class="add-cart">+ Add To Cart</a>
-										<h5>P 1600.00</h5>
-									</div>
-								</div>
-							</div>
 						</div>
 						<div class="row">
 							<div class="col-lg-12">
