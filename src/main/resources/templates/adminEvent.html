@@ -3,7 +3,7 @@
 	layout:decorate="~{adminLayout}">
 
 <head>
-	<title>ST ADMIN - COUPON</title>
+	<title>ST ADMIN - EVENT</title>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
 			<!-- DataTales Example -->
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h4 class="mt-0 font-weight-bold text-primary">Event Data<a href="#"
+					<h4 class="mt-0 font-weight-bold text-primary">Event Data<a th:href="@{/admin/insert-event}"
 							class="btn btn-primary btn-icon-split float-right">
 							<span class="icon text-white-50">
 								<i class="fas fa-plus"></i>
@@ -32,9 +32,8 @@
 								<tr>
 									<th>#</th>
 									<th>Name</th>
-									<th>Code</th>
-									<th>Discount</th>
-									<th>Expiry Date</th>
+									<th>Start Date</th>						
+									<th>End Date</th>
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -47,21 +46,23 @@
 									<th>Action</th>
 								</tr>
 							</tfoot>
-							<tbody>
-								<tr>
-									<td>C100001</td>
-									<td>Lorem</td>
-									<td>Ipsum</td>
-									<td>Ipsum</td>
-									<td>
-										<a href="#" class="btn btn-warning btn-circle btn-sm">
-											<i class="fas fa-exclamation-triangle"></i>
-										</a>
-										<a href="#" class="btn btn-danger btn-circle btn-sm">
-											<i class="fas fa-trash"></i>
-										</a>
-									</td>
-								</tr>
+								<tbody>
+									<tr th:each="event: ${events}">
+										<td th:text="${event.eventId}" />
+										<td th:text="${event.eventName}" />
+										<td th:text="${event.startDate}" />
+										<td th:text="${event.endDate}" />
+										<td>
+											<a th:href="@{/admin/edit-event/{id}(id=${event.eventId})}"
+												class="btn btn-warning btn-circle btn-sm EventEditBtn" title="Update">
+												<i class="fas fa-edit"></i>
+											</a>
+											<a th:href="@{/admin/destroy-event/(id=${event.eventId})}"
+												class="btn btn-danger btn-circle btn-sm EventDeleteBtn" title="Delete">
+												<i class="fas fa-trash"></i>
+											</a>
+										</td>
+									</tr>
 							</tbody>
 						</table>
 					</div>
@@ -69,7 +70,33 @@
 			</div>
 
 		</div>
+	<!--###########  DELETE MODAL  ################# -->
+	<div class="modal fade" id="deleteEventModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="deleteEventModalLabel">Delete Event</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p class="alert alert-danger">
+					Are you sure want to delete this record?
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<a href="" class="btn btn-danger" id="deleteEvent">Delete</a>
+			</div>
+		</div>
 	</div>
+
+</div>
+
+</div>
+
 
 </body>
 
