@@ -15,7 +15,6 @@
 
 
 $(document).ready(function() {
-
 	$('#productPrice').keyup(function() {
 		this.value = this.value.replace(/[^0-9\.]/g, '');
 	});
@@ -30,16 +29,7 @@ $(document).ready(function() {
 			backdrop: 'static'
 		});
 	});
-<<<<<<< HEAD
-});
 
-$(document).ready(function() {
-	$('.table .EventDeleteBtn').on('click', function(event) {
-		event.preventDefault();
-		var href = $(this).attr('href');
-		$('#deleteEventModal #deleteEvent').attr('href', href);
-		$('#deleteEventModal').modal({
-=======
 
 	//Product Delete Modal
 	$('.table .productDeleteBtn').on('click', function(event) {
@@ -47,14 +37,21 @@ $(document).ready(function() {
 		var href = $(this).attr('href');
 		$('#deleteProductModal #deleteProduct').attr('href', href);
 		$('#deleteProductModal').modal({
->>>>>>> productv1-mond
+		});
+	});
+});
+
+//EVENT Delete Modal
+$(document).ready(function() {
+	$('.table .EventDeleteBtn').on('click', function(event) {
+		event.preventDefault();
+		var href = $(this).attr('href');
+		$('#deleteEventModal #deleteEvent').attr('href', href);
+		$('#deleteEventModal').modal({
 			keyboard: false,
 			backdrop: 'static'
 		});
 	});
-<<<<<<< HEAD
-=======
-
 
 	$('#productImage').change(function() {
 		readURL(this);
@@ -65,5 +62,4 @@ $(document).ready(function() {
 		var fileName = $(this).val().split("\\").pop();
 		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 	});
->>>>>>> productv1-mond
 });
