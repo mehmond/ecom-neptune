@@ -7,19 +7,19 @@ public class ProductDTO {
 	private Long productId;
 	private String productName;
 	private double productPrice;
-	private String productImage;
-	private int category;
+	private String imageName;
+	private Long categoryId;
 	public ProductDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ProductDTO(Long productId, String productName, double productPrice, String productImage, int category) {
+	public ProductDTO(Long productId, String productName, double productPrice, String imageName, Long categoryId) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.productPrice = productPrice;
-		this.productImage = productImage;
-		this.category = category;
+		this.imageName = imageName;
+		this.categoryId = categoryId;
 	}
 	public Long getProductId() {
 		return productId;
@@ -39,17 +39,18 @@ public class ProductDTO {
 	public void setProductPrice(double productPrice) {
 		this.productPrice = productPrice;
 	}
-	public String getProductImage() {
-		return productImage;
+	public String getImageName() {
+		return imageName;
 	}
-	public void setProductImage(String productImage) {
-		this.productImage = productImage;
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
-	public int getCategory() {
-		return category;
+	public Long getCategoryId() {
+		return categoryId;
 	}
-	public void setCategory(int category) {
-		this.category = category;
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
-
+	
+	
 }

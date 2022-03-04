@@ -17,7 +17,7 @@
 			<!-- DataTales Example -->
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h4 class="mt-0 font-weight-bold text-primary">Product Data<a href="#"
+					<h4 class="mt-0 font-weight-bold text-primary">Product Data<a th:href="@{/admin/insert-product}"
 							class="btn btn-primary btn-icon-split float-right">
 							<span class="icon text-white-50">
 								<i class="fas fa-plus"></i>
@@ -35,8 +35,7 @@
 									<th>Name</th>
 									<th>Category</th>
 									<th>Product Price</th>
-									<th hidden>Product Image</th>
-									<th>Quantity</th>
+									<th>Product Image</th>
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -46,31 +45,28 @@
 									<th>Name</th>
 									<th>Category</th>
 									<th>Product Price</th>
-									<th hidden>Product Image</th>
-									<th>Quantity</th>
+									<th>Product Image</th>
 									<th>Action</th>
 								</tr>
 							</tfoot>
 							<tbody>
-								<tr>
-									<td>P100001</td>
-									<td>Lorem</td>
-									<td>Ipsum</td>
-									<td>Lorem</td>
-									<td>Ipsum</td>
-									<td hidden>Ipsum</td>
-									<td><a href="#" class="btn btn-success btn-circle btn-sm">
-											<i class="fas fa-check"></i>
-										</a>
-										<a href="#" class="btn btn-info btn-circle btn-sm">
-											<i class="fas fa-info-circle"></i>
-										</a>
-										<a href="#" class="btn btn-warning btn-circle btn-sm">
-											<i class="fas fa-exclamation-triangle"></i>
-										</a>
-										<a href="#" class="btn btn-danger btn-circle btn-sm">
-											<i class="fas fa-trash"></i>
-										</a>
+								<tr th:each="product: ${products}">
+									<td th:text="${product.productId}" />
+									<td th:text="${product.productName}" />
+									<td th:text="${product.Category.getCategoryName()}" />
+									<td th:text="${product.productPrice}" />
+									<td><img height="80px" width="80px"
+											th:src="@{${'/product-photos/' + product.productImage}}"></td>
+									<td>
+										<a th:href="@{/admin/edit-product/{id}(id=${product.productId})}"
+											class="btn btn-warning btn-circle btn-sm" title="Update">
+											<i class="fas fa-edit"></i>
+											</a>
+											<a th:href="@{/admin/destroy-product/(id=${product.productId})}"
+												class="btn btn-danger btn-circle btn-sm productDeleteBtn"
+												title="Delete">
+												<i class="fas fa-trash"></i>
+											</a>
 									</td>
 								</tr>
 							</tbody>
@@ -78,10 +74,34 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
-	</div>
 
+		<!--###########  DELETE MODAL  ################# -->
+		<div class="modal fade" id="deleteProductModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="deleteProductModalLabel">Delete Product</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p class="alert alert-danger">
+							Are you sure want to delete this record?
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<a href="" class="btn btn-danger" id="deleteProduct">Delete</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
 </body>
 
 </html>
