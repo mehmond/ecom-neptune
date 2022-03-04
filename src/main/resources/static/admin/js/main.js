@@ -41,7 +41,6 @@ $(document).ready(function() {
 	});
 });
 
-//EVENT Delete Modal
 $(document).ready(function() {
 	$('.table .EventDeleteBtn').on('click', function(event) {
 		event.preventDefault();
