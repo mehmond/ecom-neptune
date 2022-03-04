@@ -30,14 +30,16 @@ $(document).ready(function() {
 		});
 	});
 
+
 	//Product Delete Modal
 	$('.table .productDeleteBtn').on('click', function(event) {
 		event.preventDefault();
 		var href = $(this).attr('href');
 		$('#deleteProductModal #deleteProduct').attr('href', href);
 		$('#deleteProductModal').modal({
+		});
+	});
 });
-
 $(document).ready(function() {
 	$('.table .EventDeleteBtn').on('click', function(event) {
 		event.preventDefault();
@@ -58,6 +60,7 @@ $(document).ready(function() {
 		var fileName = $(this).val().split("\\").pop();
 		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 	});
+<<<<<<< HEAD
 	
 $(document).ready(function() {
 	$('.table .CouponDeleteBtn').on('click', function(coupon) {
@@ -79,3 +82,6 @@ $(document).ready(function() {
 		var fileName = $(this).val().split("\\").pop();
 		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
+=======
+});
+>>>>>>> cb1314640c5849cb87e41e4718cc25c8a97101bb
