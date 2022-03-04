@@ -58,4 +58,24 @@ $(document).ready(function() {
 		var fileName = $(this).val().split("\\").pop();
 		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 	});
+	
+$(document).ready(function() {
+	$('.table .CouponDeleteBtn').on('click', function(coupon) {
+		coupon.preventDefault();
+		var href = $(this).attr('href');
+		$('#deleteCouponModal #deleteCoupon').attr('href', href);
+		$('#deleteCouponModal').modal({
+			keyboard: false,
+			backdrop: 'static'
+		});
+	});
+
+	$('#productImage').change(function() {
+		readURL(this);
+	});
+
+
+	$(".custom-file-input").on("change", function() {
+		var fileName = $(this).val().split("\\").pop();
+		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
