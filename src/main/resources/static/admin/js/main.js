@@ -62,8 +62,11 @@ $(document).ready(function() {
 		var fileName = $(this).val().split("\\").pop();
 		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 	});
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 	
 $(document).ready(function() {
 	$('.table .CouponDeleteBtn').on('click', function(coupon) {
@@ -85,6 +88,7 @@ $(document).ready(function() {
 		var fileName = $(this).val().split("\\").pop();
 		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
+<<<<<<< Updated upstream
 =======
 =======
 	
@@ -95,3 +99,5 @@ $(document).ready(function() {
 >>>>>>> 3f8d27aa36c7e71214aa568582ffa4f6d137e596
 });
 >>>>>>> cb1314640c5849cb87e41e4718cc25c8a97101bb
+=======
+>>>>>>> Stashed changes
