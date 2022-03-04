@@ -47,15 +47,17 @@
 								</tr>
 							</tfoot>
 								<tbody>
-									<tr th:each="Event: ${Event}">
-										<td th:text="${Event.EventId}" />
-										<td th:text="${Event.EventName}" />
+									<tr th:each="event: ${events}">
+										<td th:text="${event.eventId}" />
+										<td th:text="${event.eventName}" />
+										<td th:text="${event.startDate}" />
+										<td th:text="${event.endDate}" />
 										<td>
-											<a th:href="@{/admin/edit-Event/{id}(id=${Event.EventId})}"
+											<a th:href="@{/admin/edit-event/{id}(id=${event.eventId})}"
 												class="btn btn-warning btn-circle btn-sm EventEditBtn" title="Update">
 												<i class="fas fa-edit"></i>
 											</a>
-											<a th:href="@{/admin/destroy-Event/(id=${Event.EventId})}"
+											<a th:href="@{/admin/destroy-event/(id=${event.eventId})}"
 												class="btn btn-danger btn-circle btn-sm EventDeleteBtn" title="Delete">
 												<i class="fas fa-trash"></i>
 											</a>
@@ -68,7 +70,33 @@
 			</div>
 
 		</div>
+	<!--###########  DELETE MODAL  ################# -->
+	<div class="modal fade" id="deleteEventModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="deleteEventModalLabel">Delete Event</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p class="alert alert-danger">
+					Are you sure want to delete this record?
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<a href="" class="btn btn-danger" id="deleteEvent">Delete</a>
+			</div>
+		</div>
 	</div>
+
+</div>
+
+</div>
+
 
 </body>
 

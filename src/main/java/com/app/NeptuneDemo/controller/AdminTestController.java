@@ -11,10 +11,6 @@ public class AdminTestController {
 		return "adminIndex";
 	}
 	
-	@RequestMapping("admin/manage-products")
-	public String adminProducts() {
-		return "adminProduct";
-	}
 	
 	@RequestMapping("admin/manage-coupons")
 	public String adminCoupon() {
