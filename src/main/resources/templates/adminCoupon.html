@@ -18,7 +18,7 @@
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h4 class="mt-0 font-weight-bold text-primary">Coupon Data
-					<a href="@{/admin/insert-coupon}" class="btn btn-primary btn-icon-split float-right">
+					<a th:href="@{/admin/insert-coupon}" class="btn btn-primary btn-icon-split float-right">
 							<span class="icon text-white-50">
 								<i class="fas fa-plus"></i>
 							</span>
@@ -32,8 +32,8 @@
 								<tr>
 									<th>#</th>
 									<th>Name</th>
-									<th>Code</th>
 									<th>Discount</th>
+									<th>Category</th>
 									<th>Expiry Date</th>
 									<th>Action</th>
 								</tr>
@@ -42,8 +42,8 @@
 								<tr>
 									<th>#</th>
 									<th>Name</th>
-									<th>Code</th>
 									<th>Discount</th>
+									<th>Category</th>
 									<th>Expiry Date</th>
 									<th>Action</th>
 								</tr>
@@ -52,6 +52,9 @@
 								<tr th:each="coupon: ${coupon}">
 									<td th:text="${coupon.couponId}" />
 									<td th:text="${coupon.couponName}" />
+									<td th:text="${coupon.couponDiscount}" />
+									<!-- <td th:text="${coupon.Category.getCategoryName()}" /> -->
+									<!-- <td th:text="${coupon.event.getendDate}" /> -->
 									<td>
 										<a th:href="@{/admin/edit-coupon/{id}(id=${coupon.couponId})}"
 											class="btn btn-warning btn-circle btn-sm couponEditBtn" title="Update">
