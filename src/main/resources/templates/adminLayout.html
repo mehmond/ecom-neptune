@@ -14,16 +14,16 @@
 	<link rel="icon" type="image/png" href="https://img.icons8.com/cute-clipart/16/000000/tie.png" />
 
 	<!-- Custom fonts for this template -->
-	<link th:href="@{/admin/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/assets/admin/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
 	<link
 		href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
 		rel="stylesheet">
 
 	<!-- Custom styles for this template -->
-	<link th:href="@{/admin/css/sb-admin-2.min.css}" rel="stylesheet">
+	<link th:href="@{/assets/admin/css/sb-admin-2.min.css}" rel="stylesheet">
 
 	<!-- Custom styles for this page -->
-	<link th:href="@{/admin/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+	<link th:href="@{/assets/admin/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
 
 </head>
 
@@ -155,11 +155,17 @@
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
 								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="mr-2 d-none d-lg-inline text-gray-600 small">ST ADMIN</span>
-								<img class="img-profile rounded-circle" th:src="@{/admin/img/undraw_profile.svg}">
+								<img class="img-profile rounded-circle"
+									th:src="@{/assets/admin/img/undraw_profile.svg}">
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 								aria-labelledby="userDropdown">
+								<a class="dropdown-item" th:href="@{/}">
+									<i class="fas fa-list-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+									Go back to home page
+								</a>
+								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
 									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 									Logout
@@ -213,7 +219,7 @@
 					<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<a class="btn btn-primary" href="login.html">Logout</a>
+						<a class="btn btn-primary" th:href="@{/sign-out}" sec:authorize="isAuthenticated()">Logout</a>
 					</div>
 				</div>
 			</div>
@@ -221,24 +227,24 @@
 		<!-- Search End -->
 		<!-- Js Plugins -->
 		<!-- Bootstrap core JavaScript-->
-		<script th:src="@{/admin/vendor/jquery/jquery.min.js}"></script>
-		<script th:src="@{/admin/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{/assets/admin/vendor/jquery/jquery.min.js}"></script>
+		<script th:src="@{/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 		<!-- Core plugin JavaScript-->
-		<script th:src="@{/admin/vendor/jquery-easing/jquery.easing.min.js}"></script>
+		<script th:src="@{/assets/admin/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
 		<!-- Custom scripts for all pages-->
-		<script th:src="@{/admin/js/sb-admin-2.min.js}"></script>
+		<script th:src="@{/assets/admin/js/sb-admin-2.min.js}"></script>
 
 		<!-- Page level plugins -->
-		<script th:src="@{/admin/vendor/datatables/jquery.dataTables.min.js}"></script>
-		<script th:src="@{/admin/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+		<script th:src="@{/assets/admin/vendor/datatables/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/assets/admin/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
 
 		<!-- Page level custom scripts -->
-		<script th:src="@{/admin/js/demo/datatables-demo.js}"></script>
+		<script th:src="@{/assets/admin/js/demo/datatables-demo.js}"></script>
 
 		<!-- Modal custom scripts -->
-		<script th:src="@{/admin/js/main.js}"></script>
+		<script th:src="@{/assets/admin/js/main.js}"></script>
 
 		<script>
 			function readURL(input) {
@@ -250,7 +256,7 @@
 					reader.readAsDataURL(input.files[0])
 				}
 			}
-			
+
 		</script>
 		<!-- Optional Section -->
 		<th:block layout:fragment="optional" />

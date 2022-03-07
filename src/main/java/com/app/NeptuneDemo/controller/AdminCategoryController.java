@@ -1,6 +1,7 @@
 package com.app.NeptuneDemo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,12 @@ import com.app.NeptuneDemo.service.CategoryService;
 public class AdminCategoryController {
 	@Autowired
 	private CategoryService categoryService;
-
+	
+	@GetMapping("/admin")
+	public String dashboard() {
+		return "adminIndex";
+	}
+	
 	@GetMapping("/admin/manage-categories")
 	public String index(Model model) {
 		model.addAttribute("categories", categoryService.index());

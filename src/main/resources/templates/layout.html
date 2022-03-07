@@ -7,20 +7,20 @@
 	<link rel="icon" type="image/png" th:href="@{/img/favicon.png}">
 	<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE"></title>
 	<!-- FAVI ICON -->
-	<link rel="icon" type="image/png" href="https://img.icons8.com/cute-clipart/16/000000/tie.png"/>
+	<link rel="icon" type="image/png" href="https://img.icons8.com/cute-clipart/16/000000/tie.png" />
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
 		rel="stylesheet">
 
 	<!-- Css Styles -->
-	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
-	<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
-	<link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
-	<link rel="stylesheet" th:href="@{/css/magnific-popup.css}" type="text/css">
-	<link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
-	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
-	<link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
-	<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/assets/css/font-awesome.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/assets/css/elegant-icons.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/assets/css/nice-select.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/assets/css/slicknav.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/assets/css/style.css}" type="text/css">
 </head>
 
 <body>
@@ -34,13 +34,13 @@
 	<div class="offcanvas-menu-wrapper">
 		<div class="offcanvas__option">
 			<div class="offcanvas__links">
-				<a th:href="@{/sign-in}">Sign in</a>
-				<a href="#">FAQs</a>
+				<a th:href="@{/sign-in}" sec:authorize="isAnonymous()">Sign in</a>
+				<a th:href="@{/sign-out}" sec:authorize="isAuthenticated()">Sign out</a>
 			</div>
 		</div>
 		<div class="offcanvas__nav__option">
-			<a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-			<a th:href="@{/cart}"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+			<a href="#" class="search-switch"><img src="assets/img/icon/search.png" alt=""></a>
+			<a th:href="@{/cart}"><img src="assets/img/icon/cart.png" alt=""> <span>0</span></a>
 		</div>
 		<div id="mobile-menu-wrap"></div>
 		<div class="offcanvas__text">
@@ -62,8 +62,9 @@
 					<div class="col-lg-6 col-md-5">
 						<div class="header__top__right">
 							<div class="header__top__links">
-								<a th:href="@{/sign-in}">Sign in</a>
-								<a href="#">FAQs</a>
+							<a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Go to Admin Page</a>
+								<a th:href="@{/sign-in}" sec:authorize="isAnonymous()">Sign in</a>
+								<a th:href="@{/sign-out}" sec:authorize="isAuthenticated()">Sign out</a>
 							</div>
 						</div>
 					</div>
@@ -74,7 +75,7 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-3">
 					<div class="header__logo">
-						<a th:href="@{/}"><img src="img/logo3.png" alt=""></a>
+						<a th:href="@{/}"><img src="assets/img/logo3.png" alt=""></a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6">
@@ -82,23 +83,14 @@
 						<ul>
 							<li><a th:href="@{/}">Home</a></li>
 							<li><a th:href="@{/shop}">Shop</a></li>
-							<li><a href="#">Pages</a>
-								<ul class="dropdown">
-									<li><a th:href="@{/contact}">Contact Us</a></li>
-									<li><a th:href="@{/product-detail}">Shop Details</a></li>
-									<li><a th:href="@{/checkout}">Check Out</a></li>
-
-								</ul>
-							</li>
-
 							<li><a th:href="@{/about}">About Us</a></li>
 						</ul>
 					</nav>
 				</div>
 				<div class="col-lg-3 col-md-3">
 					<div class="header__nav__option">
-						<a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-						<a th:href="@{/cart}"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+						<a href="#" class="search-switch"><img src="assets/img/icon/search.png" alt=""></a>
+						<a th:href="@{/cart}"><img src="/assets/img/icon/cart.png" alt=""> <span>0</span></a>
 					</div>
 				</div>
 			</div>
@@ -121,10 +113,10 @@
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="footer__about">
 						<div class="footer__logo">
-							<a href="#"><img src="img/footer-logo1.png" alt=""></a>
+							<a href="#"><img src="assets/img/footer-logo1.png" alt=""></a>
 						</div>
 						<p>The customer is at the heart of our unique business model, which includes design.</p>
-						<a href="#"><img src="img/payment.png" alt=""></a>
+						<a href="#"><img src="assets/img/payment.png" alt=""></a>
 					</div>
 				</div>
 				<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
@@ -190,16 +182,16 @@
 	</div>
 	<!-- Search End -->
 	<!-- Js Plugins -->
-	<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
-	<script th:src="@{/js/bootstrap.min.js}"></script>
-	<script th:src="@{/js/jquery.nice-select.min.js}"></script>
-	<script th:src="@{/js/jquery.nicescroll.min.js}"></script>
-	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
-	<script th:src="@{/js/jquery.countdown.min.js}"></script>
-	<script th:src="@{/js/jquery.slicknav.js}"></script>
-	<script th:src="@{/js/mixitup.min.js}"></script>
-	<script th:src="@{/js/owl.carousel.min.js}"></script>
-	<script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/assets/js/jquery-3.3.1.min.js}"></script>
+	<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.nicescroll.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.countdown.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.slicknav.js}"></script>
+	<script th:src="@{/assets/js/mixitup.min.js}"></script>
+	<script th:src="@{/assets/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/assets/js/main.js}"></script>
 	<!-- Optional Section -->
 	<th:block layout:fragment="optional" />
 
