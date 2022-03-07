@@ -9,56 +9,46 @@ import com.app.NeptuneDemo.service.CategoryService;
 import com.app.NeptuneDemo.service.ProductService;
 
 @Controller
-@RequestMapping("/")
+
 public class TestController {
 	@Autowired
 	ProductService productService;
 	@Autowired
 	CategoryService categoryService;
-
+	@RequestMapping("/")
 	public String index() {
 		return "index";
 	}
 
-	@RequestMapping("about")
+	@RequestMapping("/about")
 	public String about() {
 		return "about";
 	}
 
-	@RequestMapping("shop")
+	@RequestMapping("/shop")
 	public String shop(Model model) {
 		model.addAttribute("products", productService.index());
 		model.addAttribute("categories", categoryService.index());
 		return "productList";
 	}
 
-	@RequestMapping("product-detail")
+	@RequestMapping("/shop/product-detail")
 	public String productDetail() {
 		return "productDetail";
 	}
 
-	@RequestMapping("cart")
+	@RequestMapping("/cart")
 	public String cart() {
 		return "cart";
 	}
 
-	@RequestMapping("checkout")
+	@RequestMapping("/checkout")
 	public String checkout() {
 		return "checkout";
 	}
 
-	@RequestMapping("contact")
+	@RequestMapping("/contact")
 	public String contact() {
 		return "contact";
-	}
-
-	@RequestMapping("sign-in")
-	public String signin() {
-		return "signin";
-	}
-
-	@RequestMapping("sign-up")
-	public String signup() {
-		return "signup";
 	}
 }
