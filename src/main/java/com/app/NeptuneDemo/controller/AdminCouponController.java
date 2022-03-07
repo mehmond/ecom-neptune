@@ -23,9 +23,9 @@ public class AdminCouponController {
     @Autowired
     private EventService eventService;
 
-    @GetMapping("/admin/manage-coupon")
+    @GetMapping("/admin/manage-coupons")
     public String index(Model model) {
-        model.addAttribute("coupon", couponService.index());
+        model.addAttribute("coupons", couponService.index());
         return "adminCoupon";
     }
 
@@ -38,9 +38,15 @@ public class AdminCouponController {
     }
 
     @PostMapping("/admin/save-coupon")
-    public String save(Coupon coupon) {
-        couponService.save(coupon);
-        return "redirect:/admin/manage-coupon";
+    public String save(CouponDTO coupon) {
+    	Coupon coup = new Coupon();
+    	coup.setCouponId(coupon.getCouponId());
+    	coup.setCategory(categoryService.show(coupon.getCategoryId()));
+    	coup.setEvent(eventService.show(coupon.getEventId()));
+    	coup.setCouponName(coupon.getCouponName());
+    	coup.setCouponDiscount(coupon.getCouponDiscount());
+        couponService.save(coup);
+        return "redirect:/admin/manage-coupons";
     }
 
     @GetMapping("/admin/edit-coupon/{id}")
@@ -59,6 +65,6 @@ public class AdminCouponController {
     @GetMapping("/admin/destroy-coupon")
     public String delete(Long id) {
         couponService.delete(id);
-        return "redirect:/admin/manage-coupon";
+        return "redirect:/admin/manage-coupons";
     }
 }
