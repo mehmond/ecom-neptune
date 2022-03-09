@@ -62,7 +62,7 @@
 					<div class="col-lg-6 col-md-5">
 						<div class="header__top__right">
 							<div class="header__top__links">
-							<a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Go to Admin Page</a>
+								<a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Go to Admin Page</a>
 								<a th:href="@{/sign-in}" sec:authorize="isAnonymous()">Sign in</a>
 								<a th:href="@{/sign-out}" sec:authorize="isAuthenticated()">Sign out</a>
 							</div>
@@ -90,7 +90,8 @@
 				<div class="col-lg-3 col-md-3">
 					<div class="header__nav__option">
 						<a href="#" class="search-switch"><img src="assets/img/icon/search.png" alt=""></a>
-						<a th:href="@{/cart}"><img src="/assets/img/icon/cart.png" alt=""> <span>0</span></a>
+						<a th:href="@{/cart}"><img src="/assets/img/icon/cart.png" alt="">
+							<span th:text="${cartCount}">0</span></a>
 					</div>
 				</div>
 			</div>

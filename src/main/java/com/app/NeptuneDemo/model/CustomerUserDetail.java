@@ -9,12 +9,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class CustomerUserDetail extends User implements UserDetails {
-	
-
+	private User user;
 	public CustomerUserDetail(User user) {
 		super(user);
-		// TODO Auto-generated constructor stub
+		this.user = user;
 	}
+	
+	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -59,5 +60,9 @@ public class CustomerUserDetail extends User implements UserDetails {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+	
+	public User getUser() {
+		return this.user;
 	}
 }

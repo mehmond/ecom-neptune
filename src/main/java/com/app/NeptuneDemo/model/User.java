@@ -25,6 +25,8 @@ public class User {
 	private String password;
 	private String address;
 	private Integer phoneNumber;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<CartItem> cartItems;
 	
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinTable(
@@ -63,7 +65,7 @@ public class User {
 		this.phoneNumber = user.getPhoneNumber();
 		this.roles = user.getRoles();
 	}
-
+	
 	public Long getUserId() {
 		return userId;
 	}
