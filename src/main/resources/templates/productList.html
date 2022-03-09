@@ -7,7 +7,6 @@
 </head>
 
 <body>
-
 	<div layout:fragment="content">
 		<!-- Breadcrumb Section Begin -->
 		<section class="breadcrumb-option">
@@ -33,12 +32,6 @@
 				<div class="row">
 					<div class="col-lg-3">
 						<div class="shop__sidebar">
-							<div class="shop__sidebar__search">
-								<form action="#">
-									<input type="text" placeholder="Search...">
-									<button type="submit"><span class="icon_search"></span></button>
-								</form>
-							</div>
 							<div class="shop__sidebar__accordion">
 								<div class="accordion" id="accordionExample">
 									<div class="card">
@@ -49,7 +42,9 @@
 											<div class="card-body">
 												<div class="shop__sidebar__categories">
 													<ul class="nice-scroll">
-														<li th:each="category :${categories}"><a href="#"
+														<li><a th:href="@{/shop}" /> All Products</li>
+														<li th:each="category :${categories}"><a
+																th:href="@{/shop/category/{id}(id =${category.categoryId})}"
 																th:text="${category.categoryName}" /></li>
 													</ul>
 												</div>

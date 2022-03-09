@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.app.NeptuneDemo.global.GlobalData;
 import com.app.NeptuneDemo.model.CartItem;
+import com.app.NeptuneDemo.model.Category;
 import com.app.NeptuneDemo.model.Product;
 import com.app.NeptuneDemo.service.CategoryService;
 import com.app.NeptuneDemo.service.ProductService;
@@ -34,6 +35,14 @@ public class HomeController {
 	public String shop(Model model) {
 		model.addAttribute("products", productService.index());
 		model.addAttribute("categories", categoryService.index());
+		return "productList";
+	}
+	
+	@GetMapping("/shop/category/{id}")
+	public String categoryFilter(@PathVariable(value = "id") Long id, Model model) {
+		Category category = categoryService.show(id);
+		model.addAttribute("categories", categoryService.index());
+		model.addAttribute("products", productService.findAllByCategory(category));
 		return "productList";
 	}
 
