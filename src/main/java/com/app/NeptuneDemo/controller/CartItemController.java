@@ -36,11 +36,7 @@ public class CartItemController {
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Product product = productService.show(id);
 		User user = userService.getAuthUser(auth);
-		CartItem cart = new CartItem();
-		cart.setProduct(product);
-		cart.setUser(user);
-		cart.setQuantity(qty);
-		cartItemService.save(cart);
+		cartItemService.addProduct(product, qty, user);
 		return "redirect:/shop";
 	}
 
