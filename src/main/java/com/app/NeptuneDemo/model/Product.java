@@ -1,5 +1,7 @@
 package com.app.NeptuneDemo.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import org.hibernate.annotations.OnDelete;
@@ -20,11 +22,12 @@ public class Product {
 	@Column(name="product_image", length = 255)
 	private String productImage;
 	
-	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<CartItem> cartItems;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name= "category_id", referencedColumnName = "category_id")
 	private Category category;
-
+	
 
 	public Product() {
 		super();
