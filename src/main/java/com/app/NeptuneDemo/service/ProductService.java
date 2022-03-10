@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.NeptuneDemo.dto.ProductDTO;
+import com.app.NeptuneDemo.model.Category;
 import com.app.NeptuneDemo.model.Product;
 import com.app.NeptuneDemo.repository.ProductRepository;
 
@@ -35,6 +36,10 @@ public class ProductService {
 			throw new RuntimeException(" Category not found for id :: " + id);
 		}
 		return product;
+	}
+	
+	public List<Product> findAllByCategory(Category category){
+		return productRepo.findByCategory(category);
 	}
 
 	public void delete(Long id) {

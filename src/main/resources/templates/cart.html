@@ -4,6 +4,7 @@
 
 <head>
 	<title>Neptune - Your Cart</title>
+
 </head>
 
 <body>
@@ -30,136 +31,111 @@
 
 		<!-- Shopping Cart Section Begin -->
 		<section class="shopping-cart spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="shopping__cart__table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/shopping-cart/cart-1.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Long Sleeves with Contrast Pocket</h6>
-                                            <h5>P499.50</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">P 499.50</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/shopping-cart/cart-2.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Stefan Janowski</h6>
-                                            <h5>P4,999.50</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">P 4,999.50</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/shopping-cart/cart-3.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Basic Flowing Scarf</h6>
-                                            <h5>P399.00</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">P 399.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/shopping-cart/cart-4.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Heartstring Bag</h6>
-                                            <h5>P 750.00</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">P 750.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="continue__btn">
-                                <a href="#">Continue Shopping</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="continue__btn update__btn">
-                                <a href="#"><i class="fa fa-spinner"></i> Update cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="cart__discount">
-                        <h6>Discount codes</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Coupon code">
-                            <button type="submit">Apply</button>
-                        </form>
-                    </div>
-                    <div class="cart__total">
-                        <h6>Cart total</h6>
-                        <ul>
-                            <li>Subtotal <span>P 00.00</span></li>
-                            <li>Total <span>P 00.00</span></li>
-                        </ul>
-                        <a th:href="@{/checkout}" class="primary-btn">Proceed to checkout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="shopping__cart__table">
+							<table>
+								<thead>
+									<tr>
+										<th>Product</th>
+										<th>Quantity</th>
+										<th>Total</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr:block th:if="${cartItems=='NoData'}">
+										<td>No Data</td>
+									</tr:block>
+									<tr th:if="${cartItems!='NoData'}" th:each="item : ${cartItems}">
+										<td th:text="${item.cartItemId}" hidden >
+										<td class="product__cart__item">
+											<div class="product__cart__item__pic">
+												<img height="120px"
+													th:src="@{${'/product-photos/' + item.product.productImage}}"
+													alt="">
+											</div>
+											<div class="product__cart__item__text">
+												<h6 th:text="${item.product.productName}">
+													[[${item.product.productName}]]</h6>
+												<h5 th:text="${item.product.productPrice}">
+													[[${item.product.productPrice}]] </h5>
+											</div>
+										</td>
+										<td class="quantity__item">
+											<div class="quantity">
+												<div class="pro-qty-2">
+													<input type="text" th:value="${item.quantity}">
+												</div>
+											</div>
+										</td>
+										<td class="cart__price" th:text="${item.product.productPrice * item.quantity}">
+											[[${item.product.productPrice * item.quantity}]]</td>
+										<td class="cart__close"><a
+												th:href="@{/destroy-cart-item/(id=${item.cartItemId})}" title="Delete"
+												id="cartItemDeleteBtn"><i class="fa fa-close"></i></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6">
+								<div class="continue__btn">
+									<a href="#">Continue Shopping</a>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6">
+								<div class="continue__btn update__btn">
+									<a href="#"><i class="fa fa-spinner"></i> Update cart</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="cart__discount">
+							<h6>Discount codes</h6>
+							<form action="#">
+								<input type="text" placeholder="Coupon code">
+								<button type="submit">Apply</button>
+							</form>
+						</div>
+						<div class="cart__total">
+							<h6>Cart total</h6>
+							<ul>
+								<li>Subtotal <span>P 00.00</span></li>
+								<li>Total <span>P 00.00</span></li>
+							</ul>
+							<a th:href="@{/checkout}" class="primary-btn">Proceed to checkout</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--###########  DELETE MODAL  ################# -->
+		<div class="modal fade" id="deleteCartItemModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="deleteCartItemModal">Remove Item</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p class="alert alert-danger">
+							Are you sure want to remove this item to your cart?
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<a href="" class="btn btn-danger" id="deleteCart">Delete</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
 		<!-- Shopping Cart Section End -->
 	</div>
 

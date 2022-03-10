@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 public class Role {
 	@Id
 	@Column(name="role_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long roleId;
 	
 	@Column(nullable=false)

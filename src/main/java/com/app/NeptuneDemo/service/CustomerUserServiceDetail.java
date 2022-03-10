@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.app.NeptuneDemo.model.CustomerUserDetail;
+import com.app.NeptuneDemo.model.CustomerUserDetail;	
 import com.app.NeptuneDemo.model.User;
 import com.app.NeptuneDemo.repository.UserRepository;
 @Service
@@ -22,6 +22,4 @@ public class CustomerUserServiceDetail implements UserDetailsService {
 		user.orElseThrow(()-> new UsernameNotFoundException("User not found!"));
 		return user.map(CustomerUserDetail::new).get();
 	}
-	 
-
 }
