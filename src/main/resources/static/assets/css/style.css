@@ -111,16 +111,16 @@ ol {
 	padding-bottom: 100px;
 }
 
-.text-white h1,
-.text-white h2,
-.text-white h3,
-.text-white h4,
-.text-white h5,
-.text-white h6,
-.text-white p,
-.text-white span,
-.text-white li,
-.text-white a {
+.text-black h1,
+.text-black h2,
+.text-blackh3,
+.text-black h4,
+.text-black h5,
+.text-black h6,
+.text-black p,
+.text-black span,
+.text-black li,
+.text-black a {
 	color: #fff;
 }
 
@@ -2335,7 +2335,7 @@ ol {
 	width: 50px;
 	border: none;
 	text-align: center;
-	color: #111111;
+	color: #000000;
 	font-size: 16px;
 }
 
@@ -2347,7 +2347,7 @@ ol {
 }
 
 .shopping__cart__table table tbody tr td.cart__price {
-	color: #111111;
+	color: #000000;
 	font-size: 18px;
 	font-weight: 700;
 	width: 140px;
@@ -2355,7 +2355,7 @@ ol {
 
 .shopping__cart__table table tbody tr td.cart__close i {
 	font-size: 18px;
-	color: #111111;
+	color: #000000;
 	height: 40px;
 	width: 40px;
 	background: #f3f2ee;
@@ -2379,7 +2379,7 @@ ol {
 }
 
 .continue__btn a {
-	color: #111111;
+	color: #000000;
 	font-size: 14px;
 	font-weight: 700;
 	letter-spacing: 2px;
@@ -2394,7 +2394,7 @@ ol {
 }
 
 .cart__discount h6 {
-	color: #111111;
+	color: #000000;
 	font-weight: 700;
 	text-transform: uppercase;
 	margin-bottom: 35px;
@@ -2454,7 +2454,7 @@ ol {
 }
 
 .cart__total h6 {
-	color: #111111;
+	color: #000000;
 	text-transform: uppercase;
 	margin-bottom: 12px;
 }
