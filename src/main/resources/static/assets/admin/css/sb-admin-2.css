@@ -64,7 +64,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #858796;
+  color: #0c0c0c;
   text-align: left;
   background-color: #fff;
 }
@@ -1485,7 +1485,7 @@ pre code {
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  color: #858796;
+  color: #0c0c0c;
 }
 
 .table th,
