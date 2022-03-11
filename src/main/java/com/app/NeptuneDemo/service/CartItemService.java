@@ -1,11 +1,13 @@
 package com.app.NeptuneDemo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.NeptuneDemo.model.CartItem;
+import com.app.NeptuneDemo.model.Category;
 import com.app.NeptuneDemo.model.Product;
 import com.app.NeptuneDemo.model.User;
 import com.app.NeptuneDemo.repository.CartItemRepository;
@@ -42,6 +44,17 @@ public class CartItemService {
 	
 	public void save(CartItem cartItem) {
 		cartItemRepository.save(cartItem);
+	}
+	
+	public CartItem show(Long id) {
+		Optional<CartItem> optional = cartItemRepository.findById(id);
+		CartItem cartItem = null;
+		if (optional.isPresent()) {
+			cartItem = optional.get();
+		} else {
+			throw new RuntimeException(" Cartitem not found for id :: " + id);
+		}
+		return cartItem;
 	}
 	
 	public void delete(Long id) {
