@@ -23,7 +23,7 @@ public class CouponService {
     	couponRepo.save(coupon);
     }
 
-    public com.app.NeptuneDemo.model.Coupon show(Long id) {
+    public Coupon show(Long id) {
         Optional<Coupon> optional = couponRepo.findById(id);
         Coupon coupon = null;
         if (optional.isPresent()) {
@@ -32,6 +32,10 @@ public class CouponService {
             throw new RuntimeException("Coupon not found for id : : " + id);
         }
         return coupon;
+    }
+    
+    public Coupon findCoupon(Optional<String> couponName) {
+    	return couponRepo.findByCouponName(couponName);
     }
 
     public void delete(Long id) {
