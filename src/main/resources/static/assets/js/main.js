@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	//Category Delete Modal
-	$('#cartItemDeleteBtn').on('click', function(event) {
+	$('.cart__close .cartItemDeleteBtn').on('click', function(event) {
 		event.preventDefault();
 		var href = $(this).attr('href');
 		$('#deleteCartItemModal #deleteCart').attr('href', href);
@@ -9,6 +9,14 @@ $(document).ready(function() {
 			backdrop: 'static'
 		});
 	});
+
+	$(".alert").delay(1500).slideUp(200, function() {
+		$(this).alert('close');
+	});
+	
+	//Find and Replace active class
+	$('li.active').removeClass('active');
+	$('a[href="' + location.pathname + '"]').closest('li').addClass('active');
 });
 
 'use strict';

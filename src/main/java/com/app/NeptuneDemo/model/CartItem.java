@@ -20,18 +20,22 @@ public class CartItem {
 		private Product product;
 		
 		private int quantity;
-
+		@Column(columnDefinition = "varchar2(10) default 'IC'")
+		private String status;
+		
+		
 		public CartItem() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
 
-		public CartItem(Long cartItemId, User user, Product product, int quantity) {
+		public CartItem(Long cartItemId, User user, Product product, int quantity, String status) {
 			super();
 			this.cartItemId = cartItemId;
 			this.user = user;
 			this.product = product;
 			this.quantity = quantity;
+			this.status = status;
 		}
 
 		public Long getCartItemId() {
@@ -65,6 +69,13 @@ public class CartItem {
 		public void setQuantity(int quantity) {
 			this.quantity = quantity;
 		}
-		
+
+		public String getStatus() {
+			return status;
+		}
+
+		public void setStatus(String status) {
+			this.status = status;
+		}
 		
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.app.NeptuneDemo.dto.ProductDTO;
 import com.app.NeptuneDemo.model.Product;
@@ -41,7 +42,7 @@ public class AdminProductController {
 
 	@PostMapping("/admin/save-product")
 	public String save(ProductDTO products, @RequestParam("productImage") MultipartFile file,
-			@RequestParam("imageName") String imageName) throws IOException {
+			@RequestParam("imageName") String imageName, RedirectAttributes attributes) throws IOException {
 		Product prod = new Product();
 		prod.setCategory(categoryService.show(products.getCategoryId()));
 		prod.setProductName(products.getProductName());
@@ -58,6 +59,8 @@ public class AdminProductController {
 		prod.setProductImage(imageUUId);
 		prod.setProductId(products.getProductId());
 		productService.save(prod);
+		String message = (products.getProductId()==null) ? "Record succesfully added!" : "Record succesfully updated!";
+		attributes.addFlashAttribute("message", message);
 		return "redirect:/admin/manage-products";
 	}
 
@@ -76,8 +79,9 @@ public class AdminProductController {
 	}
 
 	@GetMapping("/admin/destroy-product")
-	public String delete(Long id) {
+	public String delete(Long id, RedirectAttributes attributes) {
 		productService.delete(id);
+		attributes.addFlashAttribute("deleteMessage", "Record succesfully deleted!");
 		return "redirect:/admin/manage-products";
 	}
 

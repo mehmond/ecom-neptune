@@ -10,7 +10,7 @@ import com.app.NeptuneDemo.model.User;
 
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
-	public List<CartItem> findByUser(User user);
-	public CartItem findByUserAndProduct(User user, Product product);
+	public List<CartItem> findByUserAndStatus(User user, String status);
+	public CartItem findByUserAndProductAndStatus(User user, Product product, String status);
 	
 }

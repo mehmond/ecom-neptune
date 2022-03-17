@@ -39,7 +39,6 @@
 			</div>
 		</div>
 		<div class="offcanvas__nav__option">
-			<a href="#" class="search-switch"><img src="assets/img/icon/search.png" alt=""></a>
 			<a th:href="@{/cart}"><img src="assets/img/icon/cart.png" alt=""> <span>0</span></a>
 		</div>
 		<div id="mobile-menu-wrap"></div>
@@ -64,6 +63,7 @@
 							<div class="header__top__links">
 								<a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Go to Admin Page</a>
 								<a th:href="@{/sign-in}" sec:authorize="isAnonymous()">Sign in</a>
+								<a th:href="@{/order-details}" sec:authorize="isAuthenticated()">Order Details</a>
 								<a th:href="@{/sign-out}" sec:authorize="isAuthenticated()">Sign out</a>
 							</div>
 						</div>
@@ -89,7 +89,6 @@
 				</div>
 				<div class="col-lg-3 col-md-3">
 					<div class="header__nav__option">
-						<a href="#" class="search-switch"><img src="assets/img/icon/search.png" alt=""></a>
 						<a th:href="@{/cart}"><img src="/assets/img/icon/cart.png" alt="">
 							<span th:text="${cartCount}">0</span></a>
 					</div>
@@ -117,28 +116,15 @@
 							<a href="#"><img src="assets/img/footer-logo1.png" alt=""></a>
 						</div>
 						<p>The customer is at the heart of our unique business model, which includes design.</p>
-						<a href="#"><img src="assets/img/payment.png" alt=""></a>
 					</div>
 				</div>
 				<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
 					<div class="footer__widget">
 						<h6>Shopping</h6>
 						<ul>
-							<li><a href="#">Clothing Store</a></li>
-							<li><a href="#">Trending Shoes</a></li>
-							<li><a href="#">Accessories</a></li>
-							<li><a href="#">Sale</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-3 col-sm-6">
-					<div class="footer__widget">
-						<h6>Shopping</h6>
-						<ul>
-							<li><a href="#">Contact Us</a></li>
-							<li><a href="#">Payment Methods</a></li>
-							<li><a href="#">Delivary</a></li>
-							<li><a href="#">Return & Exchanges</a></li>
+							<li><a th:href="@{/}">Home Page</a></li>
+							<li><a th:href="@{/shop}">Shop Now</a></li>
+							<li><a th:href="@{/about}">About Us</a></li>
 						</ul>
 					</div>
 				</div>

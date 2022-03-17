@@ -8,6 +8,10 @@
 		input[readonly] {
 			cursor: default;
 		}
+
+		.modal-lg {
+			max-width: 80% !important;
+		}
 	</style>
 </head>
 
@@ -36,6 +40,12 @@
 		<!-- Shopping Cart Section Begin -->
 		<section class="shopping-cart spad">
 			<div class="container">
+				<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${orderSuccess}">
+					<p th:text="${orderSuccess}" class="text-center"></p>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
 				<div class="row">
 					<div class="col-lg-8">
 						<div class="shopping__cart__table">
@@ -56,7 +66,7 @@
 										<td th:text="${item.cartItemId}" hidden>
 										<td class="product__cart__item">
 											<div class="product__cart__item__pic">
-												<img height="120px"
+												<img height="120px" width="120px"
 													th:src="@{${'/product-photos/' + item.product.productImage}}"
 													alt="">
 											</div>
@@ -70,9 +80,11 @@
 										<td class="quantity__item">
 											<div class="quantity">
 												<div class="pro-qty-2">
-													<a th:href="@{/cart-minus/{id}(id=${item.cartItemId})}"><span class="fa fa-angle-left dec qtybtn"></span></a>
+													<a th:href="@{/cart-minus/{id}(id=${item.cartItemId})}"><span
+															class="fa fa-angle-left dec qtybtn"></span></a>
 													<input type="text" th:value="${item.quantity}" readonly>
-													<a th:href="@{/cart-add/{id}(id=${item.cartItemId})}"><span class="fa fa-angle-right inc qtybtn"></span></a>
+													<a th:href="@{/cart-add/{id}(id=${item.cartItemId})}"><span
+															class="fa fa-angle-right inc qtybtn"></span></a>
 												</div>
 											</div>
 										</td>
@@ -80,7 +92,7 @@
 											[[${item.product.productPrice * item.quantity}]]</td>
 										<td class="cart__close"><a
 												th:href="@{/destroy-cart-item/(id=${item.cartItemId})}" title="Delete"
-												id="cartItemDeleteBtn"><i class="fa fa-close"></i></a></td>
+												class="cartItemDeleteBtn"><i class="fa fa-close"></i></a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -105,14 +117,18 @@
 						<div class="cart__total">
 							<h6>Cart total</h6>
 							<ul>
-								<li>Total <span th:text="${total} ? ${'P ' + total} : 'P 00.00'"></span></li>
+								<li th:if="${success}">Coupon applied : <span th:text="${success}"></span></li>
+								<li>Total : <span th:text="${total} ? ${'P ' + total} : 'P 00.00'"></span></li>
 							</ul>
-							<a th:href="@{/checkout}" class="primary-btn">Proceed to checkout</a>
+							<a href="" data-toggle="modal" data-target="#checkoutModal" data-backdrop="static"
+								class="primary-btn">Proceed to
+								checkout</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
+		<!-- Shopping Cart Section End -->
 		<!--###########  DELETE MODAL  ################# -->
 		<div class="modal fade" id="deleteCartItemModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
 			aria-hidden="true">
@@ -125,7 +141,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<p class="alert alert-danger">
+						<p style="color:#FF5050;">
 							Are you sure want to remove this item to your cart?
 						</p>
 					</div>
@@ -135,9 +151,95 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
-		<!-- Shopping Cart Section End -->
+
+
+		<!--###########  CHECKOUT MODAL  ################# -->
+		<div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModal"
+			aria-hidden="true" width=100%>
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="checkoutModal">Place Order</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="checkout__form">
+							<form th:action="@{/checkout}" method="POST">
+								<div class="row">
+									<div class="col-lg-8 col-md-6">
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="checkout__input">
+													<p>First Name<span>*</span></p>
+													<input type="text" th:value="${user.getFirstName()}"
+														style="color: black;" readonly>
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="checkout__input">
+													<p>Last Name<span>*</span></p>
+													<input type="text" th:value="${user.getLastName()}"
+														style="color: black;" readonly>
+												</div>
+											</div>
+										</div>
+										<div class="checkout__input">
+											<p>Address / Billing Address<span>*</span></p>
+											<input type="text" placeholder="Street Address" class="checkout__input__add"
+												th:value="${user.getAddress()}" style="color: black;" readonly>
+										</div>
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="checkout__input">
+													<p>Phone<span>*</span></p>
+													<input type="text" th:value="${user.getPhoneNumber()}"
+														style="color: black;" readonly>
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="checkout__input">
+													<p>Email<span>*</span></p>
+													<input type="text" th:value="${user.getEmail()}"
+														style="color: black;" readonly>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="checkout__order">
+											<h4 class="order__title">Your order</h4>
+											<div class="checkout__order__products">Product <span>Sub Total</span></div>
+											<ul class="checkout__total__products">
+												<li th:if="${cartItems!='NoData'}" th:each="item : ${cartItems}"
+													th:utext="${itemStat.index}+1 + '. ' + ${item.product.productName} + '<span>' + ${item.product.productPrice * item.quantity} + '</span>' ">
+												</li>
+											</ul>
+											<ul class="checkout__total__all">
+												<li th:if="${success}">Coupon applied : <span
+														th:text="${success}"></span></li>
+												<li>Total : <span
+														th:text="${total} ? ${'P ' + total} : 'P 00.00'"></span></li>
+												<input type="text" placeholder="Coupon code" name="totalAmount"
+													id="totalAmount" th:value="${total}" readonly hidden>
+											</ul>
+											<p> Payment should be done via Cash on Delivery (COD).</p>
+											<button type="submit" class="site-btn" th:if="${total>0}">PLACE
+												ORDER</button>
+											<button type="submit" class="site-btn" th:if="${total==0}" disabled>PLACE
+												ITEM FIRST</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 
 </body>

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AdminCouponController {
@@ -38,7 +39,7 @@ public class AdminCouponController {
     }
 
     @PostMapping("/admin/save-coupon")
-    public String save(CouponDTO coupon) {
+    public String save(CouponDTO coupon, RedirectAttributes attributes) {
     	Coupon coup = new Coupon();
     	coup.setCouponId(coupon.getCouponId());
     	coup.setCategory(categoryService.show(coupon.getCategoryId()));
@@ -46,6 +47,8 @@ public class AdminCouponController {
     	coup.setCouponName(coupon.getCouponName());
     	coup.setCouponDiscount(coupon.getCouponDiscount());
         couponService.save(coup);
+        String message = (coupon.getEventId() == null) ? "Record succesfully added!" : "Record succesfully updated!";
+		attributes.addFlashAttribute("message", message);
         return "redirect:/admin/manage-coupons";
     }
 
@@ -63,8 +66,9 @@ public class AdminCouponController {
     }
 
     @GetMapping("/admin/destroy-coupon")
-    public String delete(Long id) {
+    public String delete(Long id, RedirectAttributes attributes) {
         couponService.delete(id);
+        attributes.addFlashAttribute("deleteMessage", "Record succesfully deleted!");
         return "redirect:/admin/manage-coupons";
     }
 }
