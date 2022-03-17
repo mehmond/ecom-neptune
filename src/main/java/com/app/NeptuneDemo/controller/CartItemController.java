@@ -2,8 +2,8 @@ package com.app.NeptuneDemo.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,13 +16,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.app.NeptuneDemo.global.GlobalData;
 import com.app.NeptuneDemo.model.CartItem;
 import com.app.NeptuneDemo.model.Coupon;
 import com.app.NeptuneDemo.model.CustomerUserDetail;
+import com.app.NeptuneDemo.model.OrderDetail;
 import com.app.NeptuneDemo.model.Product;
 import com.app.NeptuneDemo.model.User;
+import com.app.NeptuneDemo.repository.OrderDetailRepository;
 import com.app.NeptuneDemo.repository.UserRepository;
 import com.app.NeptuneDemo.service.CartItemService;
 import com.app.NeptuneDemo.service.CouponService;
@@ -33,6 +36,7 @@ import com.app.NeptuneDemo.service.UserService;
 public class CartItemController {
 	
 	private final int DISCOUNT_DIVIDER = 100;
+	private final int DELIVERY_DATE = 7;
 	@Autowired
 	CartItemService cartItemService;
 
@@ -44,13 +48,17 @@ public class CartItemController {
 
 	@Autowired
 	CouponService couponService;
+	
+	@Autowired
+	OrderDetailRepository orderDetailRepository;
 
 	@PostMapping("/add-to-cart/{id}")
-	public String addToCart(@PathVariable Long id, @RequestParam("quantity") int qty) {
+	public String addToCart(@PathVariable Long id, @RequestParam("quantity") int qty , Model model, RedirectAttributes attributes) {
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Product product = productService.show(id);
 		User user = userService.getAuthUser(auth);
 		cartItemService.addProduct(product, qty, user);
+		attributes.addFlashAttribute("message", "Item successfully added to the cart");
 		return "redirect:/shop";
 	}
 
@@ -60,8 +68,7 @@ public class CartItemController {
 		User user = userService.getAuthUser(auth);
 		Coupon coupon = couponService.findCoupon(couponName);
 		double total = 0;
-		
-		List<CartItem> cartItems = cartItemService.index(user);
+		List<CartItem> cartItems = cartItemService.index(user, "IC");
 		if (cartItems.isEmpty()) {
 			model.addAttribute("cartItems", "NoData");
 		} else {
@@ -83,11 +90,32 @@ public class CartItemController {
 				double totalOfQualifiedProduct = qualifiedProduct.stream()
 						.map(item -> item.getProduct().getProductPrice() * item.getQuantity())
 						.mapToDouble(num -> num.doubleValue()).sum() * (couponDiscount / DISCOUNT_DIVIDER);
+				model.addAttribute("success", (int)couponDiscount + "% on all " + coupon.getCategory().getCategoryName()+".");
 				total -= totalOfQualifiedProduct;
 			}
 		}
+		model.addAttribute("user", user);
 		model.addAttribute("total", total);
 		return "cart";
+	}
+	
+	@PostMapping("/checkout")
+	public String checkout(@RequestParam("totalAmount") Double totalAmount, RedirectAttributes attributes) {
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Date orderDate = Date.valueOf(LocalDate.now());
+		Date deliveryDate = Date.valueOf(LocalDate.now().plusDays(DELIVERY_DATE));
+		User user = userService.getAuthUser(auth);
+		List<CartItem> cartItems = cartItemService.index(user, "IC");
+		cartItems.forEach(it->it.setStatus("CO"));
+		OrderDetail order = new OrderDetail();
+		order.setUser(user);
+		order.setTotalAmount(totalAmount);
+		order.setOrderDate(orderDate);
+		order.setDeliveryDate(deliveryDate);
+		orderDetailRepository.save(order);
+		cartItemService.saveAll(cartItems);
+		attributes.addFlashAttribute("orderSuccess", "Order successfully placed");
+		return "redirect:/cart";
 	}
 	
 	@GetMapping("/cart-minus/{id}")

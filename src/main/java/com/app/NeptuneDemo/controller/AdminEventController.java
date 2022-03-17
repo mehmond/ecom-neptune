@@ -3,12 +3,15 @@ package com.app.NeptuneDemo.controller;
 import com.app.NeptuneDemo.model.Event;
 import com.app.NeptuneDemo.service.EventService;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AdminEventController {
@@ -30,8 +33,10 @@ public class AdminEventController {
     }
 
     @PostMapping("/admin/save-event")
-    public String save(Event event) {
+    public String save(Event event, RedirectAttributes attributes) {
         eventService.save(event);
+        String message = (event.getEventId() == null) ? "Record succesfully added!" : "Record succesfully updated!";
+		attributes.addFlashAttribute("message", message);
         return "redirect:/admin/manage-events";
     }
 
@@ -43,8 +48,9 @@ public class AdminEventController {
     }
 
     @GetMapping("/admin/destroy-event")
-    public String delete(Long id) {
+    public String delete(Long id, RedirectAttributes attributes) {
         eventService.delete(id);
+        attributes.addFlashAttribute("deleteMessage", "Record succesfully deleted!");
         return "redirect:/admin/manage-events";
     }
 }

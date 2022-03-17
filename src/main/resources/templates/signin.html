@@ -5,10 +5,10 @@
 <head>
 	<title>Neptune - Sign in</title>
 	<style>
-	a:hover{
-		opacity: .5;
-		color: #007bff;
-	}
+		a:hover {
+			opacity: .5;
+			color: #007bff;
+		}
 	</style>
 </head>
 
@@ -24,7 +24,7 @@
 								<form th:action="@{/sign-in}" method="POST">
 									<div class="form-group">
 										<label for="exampleInputEmail1">Email address</label>
-										<input type="email" class="form-control" id="email" name = "email"
+										<input type="email" class="form-control" id="email" name="email"
 											aria-describedby="emailHelp" placeholder="Enter email" required>
 										<small id="emailHelp" class="form-text text-muted">We'll never share your email
 											with
@@ -35,7 +35,11 @@
 										<input type="password" class="form-control" id="password" name="password"
 											placeholder="Password" required>
 									</div>
-									<small class="form-text my-4">Don't have an account? Click <a th:href="@{/sign-up}"> here </a> to register.</small>
+									<small class="form-text my-4">Don't have an account? Click <a th:href="@{/sign-up}">
+											here </a> to register.</small>
+									<div th:if="${param.error}" class="alert alert-error text-danger text-center">
+										Invalid credentials.
+									</div>
 									<button type="submit" class="btn btn-primary float-right">Submit</button>
 								</form>
 						</div>

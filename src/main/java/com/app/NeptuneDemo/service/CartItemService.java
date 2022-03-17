@@ -22,14 +22,13 @@ public class CartItemService {
 	ProductRepository productRepo;
 	
 	
-	public List<CartItem> index(User user){
-		return cartItemRepository.findByUser(user);
+	public List<CartItem> index(User user, String status){
+		return cartItemRepository.findByUserAndStatus(user, status);
 	}
 	
 	public void addProduct(Product product, Integer quantity, User user) {
 		Integer addedQuantity = quantity;
-		CartItem cartItem = cartItemRepository.findByUserAndProduct(user, product);
-		
+		CartItem cartItem = cartItemRepository.findByUserAndProductAndStatus(user, product, "IC");
 		if(cartItem != null) {
 			addedQuantity = cartItem.getQuantity() + quantity;
 			cartItem.setQuantity(addedQuantity);
@@ -38,12 +37,17 @@ public class CartItemService {
 			cartItem.setQuantity(quantity);
 			cartItem.setProduct(product);
 			cartItem.setUser(user);
+			cartItem.setStatus("IC");
 		}
 		cartItemRepository.save(cartItem);
 	}
 	
 	public void save(CartItem cartItem) {
 		cartItemRepository.save(cartItem);
+	}
+	
+	public void saveAll(List<CartItem> cartItem) {
+		cartItemRepository.saveAll(cartItem);
 	}
 	
 	public CartItem show(Long id) {

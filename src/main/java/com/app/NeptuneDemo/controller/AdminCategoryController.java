@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.app.NeptuneDemo.model.Category;
 import com.app.NeptuneDemo.service.CategoryService;
 
@@ -34,8 +36,10 @@ public class AdminCategoryController {
 	}
 
 	@PostMapping("/admin/save-category")
-	public String save(Category category) {
+	public String save(Category category,  RedirectAttributes attributes) {
 		categoryService.save(category);
+		String message = (category.getCategoryId() == null) ? "Record succesfully added!" : "Record succesfully updated!";
+		attributes.addFlashAttribute("message", message);
 		return "redirect:/admin/manage-categories";
 	}
 
@@ -47,8 +51,9 @@ public class AdminCategoryController {
 	}
 
 	@GetMapping("/admin/destroy-category")
-	public String delete(Long id) {
+	public String delete(Long id, RedirectAttributes attributes) {
 		categoryService.delete(id);
+		attributes.addFlashAttribute("deleteMessage", "Record succesfully deleted!");
 		return "redirect:/admin/manage-categories";
 	}
 

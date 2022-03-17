@@ -24,7 +24,8 @@ public class User {
 	@NotEmpty
 	private String password;
 	private String address;
-	private Integer phoneNumber;
+	@Column(name = "phone_number", length = 38)
+	private Long phoneNumber;
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<CartItem> cartItems;
 	
@@ -44,7 +45,7 @@ public class User {
 	
 	public User(Long userId, String firstName, String lastName,
 			@NotEmpty @Email(message = "{errors.invalid_email}") String email, @NotEmpty String password,
-			String address, Integer phoneNumber, List<Role> roles) {
+			String address, Long phoneNumber, List<Role> roles) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
@@ -122,11 +123,11 @@ public class User {
 		this.address = address;
 	}
 
-	public Integer getPhoneNumber() {
+	public Long getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(Integer phoneNumber) {
+	public void setPhoneNumber(Long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	

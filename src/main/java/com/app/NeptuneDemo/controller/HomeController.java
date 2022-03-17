@@ -1,6 +1,10 @@
 package com.app.NeptuneDemo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.app.NeptuneDemo.global.GlobalData;
 import com.app.NeptuneDemo.model.CartItem;
 import com.app.NeptuneDemo.model.Category;
+import com.app.NeptuneDemo.model.OrderDetail;
 import com.app.NeptuneDemo.model.Product;
+import com.app.NeptuneDemo.model.User;
 import com.app.NeptuneDemo.service.CategoryService;
+import com.app.NeptuneDemo.service.OrderDetailService;
 import com.app.NeptuneDemo.service.ProductService;
+import com.app.NeptuneDemo.service.UserService;
 
 @Controller
 
@@ -21,6 +29,10 @@ public class HomeController {
 	ProductService productService;
 	@Autowired
 	CategoryService categoryService;
+	@Autowired
+	UserService userService;
+	@Autowired
+	OrderDetailService orderDetailService;
 	@RequestMapping("/")
 	public String index(Model model) {
 		return "index";
@@ -54,11 +66,14 @@ public class HomeController {
 		model.addAttribute("product", product);
 		return "productDetail";
 	}
-
-	@RequestMapping("/checkout")
-	public String checkout(Model model) {
-		model.addAttribute("cartCount", GlobalData.cart.size());
-		return "checkout";
+	
+	@GetMapping("/order-details")
+	public String orderDetails(Model model) {
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.getAuthUser(auth);
+		List<OrderDetail> orderDetail = orderDetailService.index(user);
+		model.addAttribute("orderDetails", orderDetail);
+		return "orderDetails";
 	}
 
 	@RequestMapping("/contact")
